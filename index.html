@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>과외블랙 | 1:1 맞춤 과외 매칭</title>
+<meta name="description" content="검증된 선생님과 1:1 맞춤 과외. 과목과 지역만 고르면 딱 맞는 선생님을 연결해 드립니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface-2: #1c1c1c;
+    --line: #2a2a2a;
+    --text: #f5f5f5;
+    --muted: #9a9a9a;
+    --accent: #c8ff3d;
+    --accent-ink: #0a0a0a;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Pretendard", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    line-height: 1.6;
+    word-break: keep-all;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* 헤더 */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(10,10,10,.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { color: var(--accent); }
+  .menu { display: flex; gap: 28px; font-size: 15px; color: var(--muted); }
+  .menu a:hover { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 20px; border-radius: 999px;
+    font-weight: 700; font-size: 15px; border: 0; cursor: pointer;
+    transition: transform .15s, opacity .15s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-accent { background: var(--accent); color: var(--accent-ink); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+
+  /* 히어로 */
+  .hero { padding: 96px 0 72px; text-align: center; }
+  .badge {
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    background: var(--surface-2); border: 1px solid var(--line);
+    font-size: 13px; color: var(--muted); margin-bottom: 24px;
+  }
+  .hero h1 { font-size: clamp(34px, 6vw, 60px); font-weight: 800; line-height: 1.2; letter-spacing: -1.5px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { margin-top: 18px; color: var(--muted); font-size: clamp(16px, 2.2vw, 19px); }
+
+  .search {
+    margin: 40px auto 0; max-width: 720px;
+    display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 999px; padding: 8px;
+  }
+  .search select {
+    appearance: none; background: transparent; color: var(--text);
+    border: 0; padding: 0 20px; font: inherit; font-size: 15px; height: 48px; cursor: pointer;
+  }
+  .search select option { background: var(--surface); }
+  .search select + select { border-left: 1px solid var(--line); }
+  .search .btn { height: 48px; padding: 0 28px; }
+
+  .stats { display: flex; justify-content: center; gap: 48px; margin-top: 56px; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 28px; font-weight: 800; }
+  .stat span { color: var(--muted); font-size: 14px; }
+
+  /* 섹션 공통 */
+  section { padding: 80px 0; border-top: 1px solid var(--line); }
+  .sec-head { margin-bottom: 40px; }
+  .sec-head small { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: 1px; }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: -1px; margin-top: 6px; }
+  .sec-head p { color: var(--muted); margin-top: 8px; }
+
+  /* 과목 */
+  .subjects { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .subject {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px 20px; transition: border-color .2s, background .2s;
+  }
+  .subject:hover { border-color: var(--accent); background: var(--surface-2); }
+  .subject .ico { font-size: 28px; }
+  .subject b { display: block; margin-top: 12px; font-size: 17px; }
+  .subject span { color: var(--muted); font-size: 13px; }
+
+  /* 선생님 카드 */
+  .tutors { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .tutor {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .tutor-top { display: flex; align-items: center; gap: 14px; }
+  .avatar {
+    width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+    display: grid; place-items: center; font-weight: 800; font-size: 20px;
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--accent);
+  }
+  .tutor-top b { font-size: 17px; }
+  .tutor-top span { display: block; color: var(--muted); font-size: 13px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--line); }
+  .tutor p { color: #cfcfcf; font-size: 14px; }
+  .tutor-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
+  .price b { font-size: 18px; }
+  .price span { color: var(--muted); font-size: 13px; }
+  .tutor-foot a { color: var(--accent); font-weight: 700; font-size: 14px; }
+
+  /* 이용 방법 */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; counter-reset: step; }
+  .step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; }
+  .step::before {
+    counter-increment: step; content: "0" counter(step);
+    display: block; color: var(--accent); font-weight: 800; font-size: 14px; margin-bottom: 14px;
+  }
+  .step b { font-size: 18px; }
+  .step p { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+  /* 장점 */
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .feature { display: flex; gap: 16px; padding: 24px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+  .feature .ico { font-size: 24px; }
+  .feature b { font-size: 17px; }
+  .feature p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+  /* 상담 신청 */
+  .cta-box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
+    padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  }
+  .cta-box h2 { font-size: clamp(26px, 4vw, 34px); font-weight: 800; letter-spacing: -1px; }
+  .cta-box h2 em { font-style: normal; color: var(--accent); }
+  .cta-box > div > p { color: var(--muted); margin-top: 10px; }
+  form { display: grid; gap: 10px; }
+  form input, form select, form textarea {
+    width: 100%; background: var(--bg); color: var(--text);
+    border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font: inherit; font-size: 15px;
+  }
+  form input:focus, form select:focus, form textarea:focus { outline: none; border-color: var(--accent); }
+  form textarea { resize: vertical; min-height: 90px; }
+  form .btn { height: 50px; border-radius: 12px; }
+  .form-msg { color: var(--accent); font-size: 14px; display: none; }
+
+  footer { border-top: 1px solid var(--line); padding: 40px 0; color: var(--muted); font-size: 13px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .menu { display: none; }
+    .search { grid-template-columns: 1fr; border-radius: 20px; }
+    .search select + select { border-left: 0; border-top: 1px solid var(--line); }
+    .search .btn { border-radius: 14px; }
+    .cta-box { grid-template-columns: 1fr; padding: 28px 20px; }
+    .stats { gap: 28px; }
+    section { padding: 60px 0; }
+    .hero { padding: 64px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">과외<span>블랙</span></a>
+    <nav class="menu">
+      <a href="#subjects">과목</a>
+      <a href="#tutors">선생님</a>
+      <a href="#how">이용 방법</a>
+      <a href="#contact">상담 신청</a>
+    </nav>
+    <a href="#contact" class="btn btn-accent">무료 상담</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <span class="badge">첫 수업 무료 체험</span>
+    <h1>나에게 딱 맞는 선생님,<br><em>1:1 맞춤 과외</em></h1>
+    <p>과목과 지역만 고르세요. 검증된 선생님을 바로 연결해 드립니다.</p>
+
+    <form class="search" onsubmit="event.preventDefault(); document.getElementById('contact').scrollIntoView();">
+      <select aria-label="과목">
+        <option>과목 선택</option>
+        <option>수학</option><option>영어</option><option>국어</option>
+        <option>과학</option><option>사회</option><option>코딩</option>
+      </select>
+      <select aria-label="지역">
+        <option>지역 선택</option>
+        <option>서울</option><option>경기</option><option>인천</option>
+        <option>부산</option><option>대구</option><option>온라인 수업</option>
+      </select>
+      <button class="btn btn-accent" type="submit">선생님 찾기</button>
+    </form>
+
+    <div class="stats">
+      <div class="stat"><b>1:1</b><span>맞춤 수업</span></div>
+      <div class="stat"><b>무료</b><span>첫 상담 · 체험 수업</span></div>
+      <div class="stat"><b>24h</b><span>안에 선생님 연결</span></div>
+    </div>
+  </div>
+
+  <section id="subjects">
+    <div class="wrap">
+      <div class="sec-head">
+        <small>SUBJECTS</small>
+        <h2>어떤 과목이 필요하세요?</h2>
+        <p>초·중·고 내신부터 수능, 성인 과외까지</p>
+      </div>
+      <div class="subjects">
+        <a href="#contact" class="subject"><div class="ico">📐</div><b>수학</b><span>내신 · 수능 · 경시</span></a>
+        <a href="#contact" class="subject"><div class="ico">🔤</div><b>영어</b><span>내신 · 수능 · 회화</span></a>
+        <a href="#contact" class="subject"><div class="ico">📖</div><b>국어</b><span>문학 · 비문학 · 논술</span></a>
+        <a href="#contact" class="subject"><div class="ico">🧪</div><b>과학</b><span>물리 · 화학 · 생명 · 지구</span></a>
+        <a href="#contact" class="subject"><div class="ico">🌏</div><b>사회</b><span>한국사 · 사탐</span></a>
+        <a href="#contact" class="subject"><div class="ico">💻</div><b>코딩</b><span>파이썬 · 웹 · 정보</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tutors">
+    <div class="wrap">
+      <div class="sec-head">
+        <small>TUTORS</small>
+        <h2>선생님 소개</h2>
+        <p>아래는 예시입니다. 실제 선생님 정보로 바꿔 주세요.</p>
+      </div>
+      <div class="tutors">
+        <article class="tutor">
+          <div class="tutor-top">
+            <div class="avatar">김</div>
+            <div><b>김OO 선생님</b><span>OO대학교 수학교육과</span></div>
+          </div>
+          <div class="tags"><span class="tag">수학</span><span class="tag">고등 내신</span><span class="tag">수능</span></div>
+          <p>개념부터 다시 잡아 주는 수업. 오답 노트로 약점을 끝까지 관리합니다.</p>
+          <div class="tutor-foot">
+            <div class="price"><b>OO만원</b> <span>/ 월 8회</span></div>
+            <a href="#contact">상담하기 →</a>
+          </div>
+        </article>
+        <article class="tutor">
+          <div class="tutor-top">
+            <div class="avatar">이</div>
+            <div><b>이OO 선생님</b><span>OO대학교 영어영문학과</span></div>
+          </div>
+          <div class="tags"><span class="tag">영어</span><span class="tag">중등</span><span class="tag">문법</span></div>
+          <p>문법과 독해를 함께 잡는 수업. 매주 단어 테스트로 꾸준히 관리합니다.</p>
+          <div class="tutor-foot">
+            <div class="price"><b>OO만원</b> <span>/ 월 8회</span></div>
+            <a href="#contact">상담하기 →</a>
+          </div>
+        </article>
+        <article class="tutor">
+          <div class="tutor-top">
+            <div class="avatar">박</div>
+            <div><b>박OO 선생님</b><span>OO대학교 화학과</span></div>
+          </div>
+          <div class="tags"><span class="tag">과학</span><span class="tag">화학</span><span class="tag">온라인</span></div>
+          <p>어려운 개념을 그림과 실생활 예시로 쉽게 설명합니다.</p>
+          <div class="tutor-foot">
+            <div class="price"><b>OO만원</b> <span>/ 월 8회</span></div>
+            <a href="#contact">상담하기 →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <small>HOW IT WORKS</small>
+        <h2>이용 방법</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><b>상담 신청</b><p>과목, 학년, 원하는 시간을 남겨 주세요.</p></div>
+        <div class="step"><b>선생님 추천</b><p>조건에 맞는 선생님을 골라 연락드립니다.</p></div>
+        <div class="step"><b>무료 체험 수업</b><p>첫 수업을 들어 보고 결정하세요.</p></div>
+        <div class="step"><b>정규 수업 시작</b><p>매달 학습 리포트로 진도를 확인합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <small>WHY US</small>
+        <h2>이런 점이 다릅니다</h2>
+      </div>
+      <div class="features">
+        <div class="feature"><div class="ico">✅</div><div><b>검증된 선생님</b><p>학력과 경력을 직접 확인한 선생님만 연결합니다.</p></div></div>
+        <div class="feature"><div class="ico">🎯</div><div><b>1:1 맞춤 커리큘럼</b><p>학생 수준에 맞춰 수업 계획을 따로 세웁니다.</p></div></div>
+        <div class="feature"><div class="ico">📊</div><div><b>월간 학습 리포트</b><p>진도와 성취도를 학부모님께 매달 공유합니다.</p></div></div>
+        <div class="feature"><div class="ico">🔄</div><div><b>선생님 교체 보장</b><p>맞지 않으면 언제든 다른 선생님으로 바꿔 드립니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="cta-box">
+        <div>
+          <h2>지금 <em>무료 상담</em><br>신청하세요</h2>
+          <p>남겨 주신 연락처로 24시간 안에 연락드립니다.</p>
+        </div>
+        <form id="contact-form">
+          <input name="name" placeholder="학생 이름" required>
+          <input name="phone" type="tel" placeholder="연락처 (010-0000-0000)" required>
+          <select name="subject" required>
+            <option value="">희망 과목</option>
+            <option>수학</option><option>영어</option><option>국어</option>
+            <option>과학</option><option>사회</option><option>코딩</option>
+          </select>
+          <textarea name="memo" placeholder="학년, 희망 시간, 요청 사항"></textarea>
+          <button class="btn btn-accent" type="submit">상담 신청하기</button>
+          <p class="form-msg" id="form-msg">신청이 접수되었습니다. 곧 연락드릴게요!</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 과외블랙. All rights reserved.</span>
+    <span>문의: 이메일 또는 전화번호를 입력하세요</span>
+  </div>
+</footer>
+
+<script>
+  // 상담 신청서: 아직 접수 서버가 없어 화면에만 완료 메시지를 보여줍니다.
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('form-msg').style.display = 'block';
+    this.reset();
+  });
+</script>
+</body>
+</html>
