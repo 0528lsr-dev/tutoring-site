@@ -20,31 +20,6 @@ if (search) {
   });
 }
 
-// 선생님 페이지: 과목 필터
-var tutorList = document.getElementById('tutor-list');
-if (tutorList) {
-  var chips = document.querySelectorAll('.chip');
-  var empty = document.getElementById('tutor-empty');
-
-  function filter(subject) {
-    var shown = 0;
-    tutorList.querySelectorAll('.tutor').forEach(function (t) {
-      var match = !subject || t.dataset.subject === subject;
-      t.hidden = !match;
-      if (match) shown++;
-    });
-    chips.forEach(function (c) { c.classList.toggle('active', c.dataset.subject === subject); });
-    empty.style.display = shown ? 'none' : 'block';
-  }
-
-  chips.forEach(function (c) {
-    c.addEventListener('click', function () { filter(c.dataset.subject); });
-  });
-
-  var params = new URLSearchParams(location.search);
-  filter(params.get('subject') || '');
-}
-
 // 상담 신청서: 아직 접수 서버가 없어 화면에만 완료 메시지를 보여줍니다.
 var contactForm = document.getElementById('contact-form');
 if (contactForm) {

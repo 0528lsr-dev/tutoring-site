@@ -144,6 +144,29 @@ section { padding: 80px 0; border-top: 1px solid var(--line); }
 .price span { color: var(--muted); font-size: 13px; }
 .tutor-foot a { color: var(--accent); font-weight: 700; font-size: 14px; }
 .empty { color: var(--muted); padding: 40px 0; text-align: center; display: none; }
+.tutor .where { color: var(--muted); font-size: 13px; }
+.muted-sm { color: var(--muted); font-size: 13px; }
+
+/* 선생님 검색 */
+.tsearch { display: grid; grid-template-columns: 1fr auto; gap: 12px; margin-bottom: 24px; }
+.tsearch input {
+  height: 60px; padding: 0 24px; border-radius: 16px; font: inherit; font-size: 16px;
+  background: var(--surface); color: var(--text); border: 1px solid var(--line);
+}
+.tsearch input:focus { outline: none; border-color: var(--accent); }
+.tsearch .btn { height: 60px; padding: 0 36px; border-radius: 16px; font-size: 17px; }
+.filters { display: grid; gap: 12px; margin-bottom: 32px; }
+.filter-row { display: grid; grid-template-columns: 76px 1fr; align-items: start; gap: 8px; }
+.filter-label { font-size: 14px; font-weight: 700; color: var(--muted); padding-top: 9px; }
+.filter-row .chips { margin-bottom: 0; }
+.tutor-count { color: var(--muted); font-weight: 700; margin-bottom: 16px; }
+.tutor-count b { color: var(--text); }
+@media (max-width: 760px) {
+  .tsearch input, .tsearch .btn { height: 52px; }
+  .tsearch .btn { padding: 0 20px; }
+  .filter-row { grid-template-columns: 1fr; gap: 6px; }
+  .filter-label { padding-top: 0; }
+}
 
 /* 이용 방법 */
 .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; counter-reset: step; }
