@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>선생님 찾기 | 과외블랙</title>
+<meta name="description" content="과목별 1:1 과외 선생님 소개">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo">과외<span>블랙</span></a>
+    <nav class="menu">
+      <a href="subjects.html">과목</a>
+      <a href="tutors.html">선생님</a>
+      <a href="how.html">이용 방법</a>
+      <a href="contact.html">상담 신청</a>
+    </nav>
+    <a href="contact.html" class="btn btn-accent">무료 상담</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-hero">
+    <small>TUTORS</small>
+    <h1>선생님 찾기</h1>
+    <p>아래 선생님 정보는 예시입니다. 실제 선생님 정보로 바꿔 주세요.</p>
+  </div>
+
+  <div class="chips">
+    <button class="chip" data-subject="">전체</button>
+    <button class="chip" data-subject="수학">수학</button>
+    <button class="chip" data-subject="영어">영어</button>
+    <button class="chip" data-subject="국어">국어</button>
+    <button class="chip" data-subject="과학">과학</button>
+    <button class="chip" data-subject="사회">사회</button>
+    <button class="chip" data-subject="코딩">코딩</button>
+  </div>
+
+  <div class="tutors" id="tutor-list">
+    <article class="tutor" data-subject="수학">
+      <div class="tutor-top"><div class="avatar">김</div><div><b>김OO 선생님</b><span>OO대학교 수학교육과</span></div></div>
+      <div class="tags"><span class="tag">수학</span><span class="tag">고등 내신</span><span class="tag">수능</span></div>
+      <p>개념부터 다시 잡아 주는 수업. 오답 노트로 약점을 끝까지 관리합니다.</p>
+      <div class="tutor-foot"><div class="price"><b>OO만원</b> <span>/ 월 8회</span></div><a href="contact.html?subject=수학">상담하기 →</a></div>
+    </article>
+    <article class="tutor" data-subject="수학">
+      <div class="tutor-top"><div class="avatar">정</div><div><b>정OO 선생님</b><span>OO대학교 수학과</span></div></div>
+      <div class="tags"><span class="tag">수학</span><span class="tag">중등</span><span class="tag">선행</span></div>
+      <p>중학 수학 선행과 고등 수학 기초를 단단하게 연결합니다.</p>
+      <div class="tutor-foot"><div class="price"><b>OO만원</b> <span>/ 월 8회</span></div><a href="contact.html?subject=수학">상담하기 →</a></div>
+    </article>
+    <article class="tutor" data-subject="영어">
+      <div class="tutor-top"><div class="avatar">이</div><div><b>이OO 선생님</b><span>OO대학교 영어영문학과</span></div></div>
+      <div class="tags"><span class="tag">영어</span><span class="tag">중등</span><span class="tag">문법</span></div>
+      <p>문법과 독해를 함께 잡는 수업. 매주 단어 테스트로 꾸준히 관리합니다.</p>
+      <div class="tutor-foot"><div class="price"><b>OO만원</b> <span>/ 월 8회</span></div><a href="contact.html?subject=영어">상담하기 →</a></div>
+    </article>
+    <article class="tutor" data-subject="국어">
+      <div class="tutor-top"><div class="avatar">최</div><div><b>최OO 선생님</b><span>OO대학교 국어국문학과</span></div></div>
+      <div class="tags"><span class="tag">국어</span><span class="tag">수능</span><span class="tag">논술</span></div>
+      <p>비문학 지문 구조 분석으로 읽는 속도와 정확도를 함께 올립니다.</p>
+      <div class="tutor-foot"><div class="price"><b>OO만원</b> <span>/ 월 8회</span></div><a href="contact.html?subject=국어">상담하기 →</a></div>
+    </article>
+    <article class="tutor" data-subject="과학">
+      <div class="tutor-top"><div class="avatar">박</div><div><b>박OO 선생님</b><span>OO대학교 화학과</span></div></div>
+      <div class="tags"><span class="tag">과학</span><span class="tag">화학</span><span class="tag">온라인</span></div>
+      <p>어려운 개념을 그림과 실생활 예시로 쉽게 설명합니다.</p>
+      <div class="tutor-foot"><div class="price"><b>OO만원</b> <span>/ 월 8회</span></div><a href="contact.html?subject=과학">상담하기 →</a></div>
+    </article>
+    <article class="tutor" data-subject="사회">
+      <div class="tutor-top"><div class="avatar">한</div><div><b>한OO 선생님</b><span>OO대학교 역사교육과</span></div></div>
+      <div class="tags"><span class="tag">사회</span><span class="tag">한국사</span><span class="tag">검정시험</span></div>
+      <p>흐름으로 외우는 한국사. 연표 하나로 전체 시대를 정리합니다.</p>
+      <div class="tutor-foot"><div class="price"><b>OO만원</b> <span>/ 월 8회</span></div><a href="contact.html?subject=사회">상담하기 →</a></div>
+    </article>
+    <article class="tutor" data-subject="코딩">
+      <div class="tutor-top"><div class="avatar">윤</div><div><b>윤OO 선생님</b><span>OO대학교 컴퓨터공학과</span></div></div>
+      <div class="tags"><span class="tag">코딩</span><span class="tag">파이썬</span><span class="tag">웹</span></div>
+      <p>직접 만들어 보며 배우는 프로젝트형 코딩 수업입니다.</p>
+      <div class="tutor-foot"><div class="price"><b>OO만원</b> <span>/ 월 8회</span></div><a href="contact.html?subject=코딩">상담하기 →</a></div>
+    </article>
+  </div>
+  <p class="empty" id="tutor-empty">해당 과목 선생님을 준비 중입니다. <a href="contact.html" style="color:var(--accent)">상담 신청</a>을 남겨 주세요.</p>
+
+  <div style="height:80px"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 과외블랙. All rights reserved.</span>
+    <nav>
+      <a href="subjects.html">과목</a>
+      <a href="tutors.html">선생님</a>
+      <a href="how.html">이용 방법</a>
+      <a href="contact.html">상담 신청</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
