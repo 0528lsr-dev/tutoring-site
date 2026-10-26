@@ -18,22 +18,25 @@
     });
   }
 
+  // 검색 색인(teachers-search.js)은 늦게 로드될 수 있어 매번 확인
   function haystack(t) {
-    return [t.name, t.gender + '선생님', t.mode]
+    var extra = (window.TSEARCH && t.id && window.TSEARCH[t.id]) || '';
+    return [t.name, t.gender + '선생님', t.mode, t.kid ? '유아·아동 유아 아동' : '', extra]
       .concat(t.subjects.map(function (s) { return s.join(' '); }))
       .concat(t.regions.length ? t.regions : ['전국 화상'])
-      .join(' ');
+      .join(' ').toLowerCase();
   }
 
   function matches(t) {
     if (state.mode === '방문+화상' && t.mode !== '방문+화상') return false;
     if (state.mode && state.mode !== '방문+화상' && t.mode.indexOf(state.mode) < 0) return false;
-    if (state.subject && !t.subjects.some(function (s) { return s[0] === state.subject; })) return false;
+    if (state.subject === '유아·아동') { if (!t.kid) return false; }
+    else if (state.subject && !t.subjects.some(function (s) { return s[0] === state.subject; })) return false;
     if (state.region && !t.regions.some(function (r) { return r.indexOf(state.region) === 0; })) return false;
     if (state.gender && t.gender !== state.gender) return false;
     if (state.q) {
       var h = haystack(t);
-      var words = state.q.split(/\s+/).filter(Boolean);
+      var words = state.q.toLowerCase().split(/\s+/).filter(Boolean);
       if (!words.every(function (w) { return h.indexOf(w) >= 0; })) return false;
     }
     return true;
@@ -41,13 +44,14 @@
 
   function card(t, i) {
     var color = COLORS[i % COLORS.length];
-    var tags = t.subjects.map(function (s) {
+    var tags = (t.kid ? '<span class="tag tag-kid">유아·아동</span>' : '') + t.subjects.map(function (s) {
       return '<span class="tag">' + esc(s[0] + ' ' + s[1]) + '</span>';
     }).join('');
+    var who = (t.gender ? esc(t.gender) + '선생님' : '선생님') + ' · ' + esc(t.mode);
     var where = t.regions.length ? t.regions.join(', ') : '전국 화상 수업';
     return '<article class="tutor">' +
       '<div class="tutor-top"><div class="avatar" style="color:' + color + ';border-color:' + color + '55">' + esc(t.name.charAt(0)) + '</div>' +
-      '<div><b>' + esc(t.name) + ' 선생님</b><span>' + esc(t.gender) + '선생님 · ' + esc(t.mode) + '</span></div></div>' +
+      '<div><b>' + esc(t.name) + ' 선생님</b><span>' + who + '</span></div></div>' +
       '<div class="tags">' + tags + '</div>' +
       '<p class="where">📍 ' + esc(where) + '</p>' +
       '<div class="tutor-foot"><span class="muted-sm">무료 체험 수업 가능</span>' +
@@ -102,6 +106,9 @@
   var region = params.get('region') || '';
   if (region === '온라인 수업') state.mode = '화상';
   else state.region = region;
+
+  // 검색 색인 로드가 끝나면 teachers-search.js 가 이 함수를 호출
+  window.__tRefresh = render;
 
   render();
 })();

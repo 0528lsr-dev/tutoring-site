@@ -271,3 +271,4 @@ footer nav a:hover { color: var(--text); }
 .tag { background: var(--surface-2); color: #9b4a62; border-color: #f6d3dc; }
 form input, form select, form textarea { background: var(--surface); }
 footer { background: #fff3f5; }
+.tag-kid { background: var(--leaf-soft); color: var(--leaf); border-color: #cfe9d9; font-weight: 700; }
