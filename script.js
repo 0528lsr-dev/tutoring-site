@@ -20,8 +20,8 @@ if (search) {
   });
 }
 
-// 상담 신청서: Formspree(이메일 알림)와 구글 시트(Apps Script)에 동시에 보내고
-// 페이지 이동 없이 결과를 보여줍니다. 둘 중 하나라도 저장되면 접수 완료로 안내합니다.
+// 상담 신청서: 구글 시트(Apps Script)로 보내고 페이지 이동 없이 결과를 보여줍니다.
+// Apps Script가 저장 후 'ok'를 돌려줄 때만 접수 완료로 안내합니다.
 var SHEET_URL = 'https://script.google.com/macros/s/AKfycbx7cFmG03i-dpfj7IWynETu5Z2af_dla1qaA-Kt8KbFF28H-4Re684VpmO7vBSeaILU/exec';
 var contactForm = document.getElementById('contact-form');
 if (contactForm) {
@@ -36,23 +36,13 @@ if (contactForm) {
     btn.disabled = true;
     btn.textContent = '보내는 중...';
 
-    var data = new FormData(contactForm);
-
-    // Apps Script는 다른 사이트의 응답을 읽을 수 없게(no-cors) 보내므로, 요청이 나가면 저장된 것으로 봅니다.
-    var toSheet = fetch(SHEET_URL, {
+    fetch(SHEET_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      body: new URLSearchParams(data)
-    }).then(function () { return true; }, function () { return false; });
-
-    var toMail = fetch(contactForm.action, {
-      method: 'POST',
-      body: data,
-      headers: { Accept: 'application/json' }
-    }).then(function (res) { return res.ok; }, function () { return false; });
-
-    Promise.all([toMail, toSheet]).then(function (r) {
-      if (!r[0] && !r[1]) throw new Error('send failed');
+      body: new URLSearchParams(new FormData(contactForm))
+    }).then(function (res) {
+      return res.text();
+    }).then(function (text) {
+      if (text.trim() !== 'ok') throw new Error('sheet: ' + text);
       msg.style.color = 'var(--accent)';
       msg.textContent = '신청이 접수되었습니다. 곧 연락드릴게요!';
       contactForm.reset();
