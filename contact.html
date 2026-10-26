@@ -46,25 +46,26 @@
         <div><b>상담 시간</b><span>평일 10:00 ~ 21:00</span></div>
       </div>
     </div>
-    <form id="contact-form">
-      <input name="name" placeholder="학생 이름" required>
-      <input name="phone" type="tel" placeholder="연락처 (010-0000-0000)" required>
-      <select name="grade" required>
+    <form id="contact-form" action="https://formspree.io/f/xbggglkp" method="POST">
+      <input type="hidden" name="_subject" value="[과외블랙] 새 상담 신청">
+      <input name="학생 이름" placeholder="학생 이름" required>
+      <input name="연락처" type="tel" placeholder="연락처 (010-0000-0000)" required>
+      <select name="학년" required>
         <option value="">학년</option>
         <option>초등</option><option>중1</option><option>중2</option><option>중3</option>
         <option>고1</option><option>고2</option><option>고3</option><option>N수생</option><option>성인</option>
       </select>
-      <select name="subject" required>
+      <select name="희망 과목" required>
         <option value="">희망 과목</option>
         <option>수학</option><option>영어</option><option>국어</option>
         <option>과학</option><option>사회</option><option>코딩</option>
       </select>
-      <input name="address" placeholder="주소 (예: 서울 강남구 대치동) *" required minlength="5">
-      <input name="apartment" placeholder="아파트·건물명 (예: OO아파트) *" required minlength="2">
-      <input name="unit" placeholder="동·호수 (선택)">
-      <textarea name="memo" placeholder="희망 시간, 방문/화상 수업, 요청 사항"></textarea>
+      <input name="주소" placeholder="주소 (예: 서울 강남구 대치동) *" required minlength="5">
+      <input name="아파트·건물명" placeholder="아파트·건물명 (예: OO아파트) *" required minlength="2">
+      <input name="동·호수" placeholder="동·호수 (선택)">
+      <textarea name="요청 사항" placeholder="희망 시간, 방문/화상 수업, 요청 사항"></textarea>
       <button class="btn btn-accent" type="submit">상담 신청하기</button>
-      <p class="form-msg" id="form-msg">신청이 접수되었습니다. 곧 연락드릴게요!</p>
+      <p class="form-msg" id="form-msg"></p>
     </form>
   </div>
 </main>
