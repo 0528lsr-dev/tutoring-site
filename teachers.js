@@ -4,7 +4,7 @@
   if (!list || typeof TEACHERS === 'undefined') return;
 
   var PAGE = 30;
-  var COLORS = ['#c8ff3d', '#7dd3fc', '#fca5a5', '#fcd34d', '#a5b4fc', '#86efac', '#f0abfc'];
+  var COLORS = ['#e94f78', '#3f9b6e', '#e8873a', '#7b6fd6', '#2f8fc4', '#c2509d', '#b08a1e'];
   var state = { mode: '', subject: '', region: '', gender: '', q: '', shown: PAGE };
 
   var countEl = document.getElementById('tutor-count');

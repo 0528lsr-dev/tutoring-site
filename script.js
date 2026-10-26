@@ -44,7 +44,7 @@ if (contactForm) {
       msg.textContent = '신청이 접수되었습니다. 곧 연락드릴게요!';
       contactForm.reset();
     }).catch(function () {
-      msg.style.color = '#fca5a5';
+      msg.style.color = '#c62828';
       msg.textContent = '전송에 실패했습니다. 잠시 후 다시 시도하시거나 010-5577-3067로 전화 주세요.';
     }).then(function () {
       msg.style.display = 'block';
