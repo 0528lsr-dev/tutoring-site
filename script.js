@@ -26,7 +26,7 @@ var SHEET_URL = 'https://script.google.com/macros/s/AKfycbx7cFmG03i-dpfj7IWynETu
 var contactForm = document.getElementById('contact-form');
 if (contactForm) {
   var params2 = new URLSearchParams(location.search);
-  var subjectSelect = contactForm.querySelector('[name="희망 과목"]');
+  var subjectSelect = contactForm.querySelector('[name="subject"]');
   if (params2.get('subject')) subjectSelect.value = params2.get('subject');
 
   contactForm.addEventListener('submit', function (e) {
