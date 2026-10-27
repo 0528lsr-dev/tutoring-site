@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /data/
 
 Sitemap: https://teacher4u.co.kr/sitemap.xml
+Sitemap: https://teacher4u.co.kr/sitemap-main.xml
+Sitemap: https://teacher4u.co.kr/sitemap-high.xml
+Sitemap: https://teacher4u.co.kr/sitemap-mid.xml
+Sitemap: https://teacher4u.co.kr/sitemap-teachers.xml
