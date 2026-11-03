@@ -19,7 +19,7 @@
 // 방문 알림 → 텔레그램 (2026-11-03, Apps Script 웹 앱 경유. 코드: Desktop/국제학교사이트_복제키트/텔레그램_방문알림_코드.gs)
 //   내 방문 빼기: 주소 끝에 ?novisit 붙여 한 번 열면 그 브라우저는 알림 안 감 (?visit 로 되돌림)
 (function () {
-  var HOOK = "https://script.google.com/macros/s/AKfycbzpQIZERcfJP0aKF15sZFpIo0-HPvARnnyhlaORN0PCk1bf8j5F0Q5fHRZZ7rkABi5E/exec", SITE = "티쳐포유";
+  var HOOK = "https://script.google.com/macros/s/AKfycbzpQIZERcfJP0aKF15sZFpIo0-HPvARnnyhlaORN0PCk1bf8j5F0Q5fHRZZ7rkABi5E/exec", SITE = "티쳐포유", SKIP = ["121.128.108.11"];
   var ls = {}, ss = {};
   try { ls = localStorage; ss = sessionStorage; } catch (e) {}
   try { if (/[?&]novisit/.test(location.search)) ls.setItem('novisit', '1'); if (/[?&]visit(&|$)/.test(location.search)) ls.removeItem('novisit'); } catch (e) {}
@@ -75,10 +75,11 @@
     var done = false;
     var go = function (geo) { if (done) return; done = true; info.geo = geo || ''; set('geo', info.geo); post(info); };
     setTimeout(function () { go(''); }, 2500);
-    try { fetch('https://ipapi.co/json/').then(function (r) { return r.json(); }).then(function (d) { go(region(d)); }, function () { go(''); }); } catch (e) { go(''); }
+    try { fetch('https://ipapi.co/json/').then(function (r) { return r.json(); }).then(function (d) { if (d && SKIP.indexOf(d.ip) >= 0) { done = true; try { ls.setItem('novisit', '1'); } catch (e) {} return; } go(region(d)); }, function () { go(''); }); } catch (e) { go(''); }
   }
   function hot() {
     if (get('hot')) return;
+    try { if (ls.getItem && ls.getItem('novisit')) return; } catch (e) {}
     var sec = Math.round((Date.now() - +(get('start') || Date.now())) / 1000), pages = +(get('pages') || 1);
     if (sec < 60 && pages < 3) return;
     set('hot', '1');
