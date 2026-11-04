@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 440" role="img" aria-label="창가 책상에서 공부하는 장면 그림">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bfe6fd"/>
+      <stop offset="1" stop-color="#eef8ff"/>
+    </linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d7ecfb"/>
+      <stop offset="1" stop-color="#b9dcf5"/>
+    </linearGradient>
+    <linearGradient id="cover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#0369a1" flood-opacity=".18"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 카드 -->
+  <rect width="560" height="440" rx="32" fill="#f5faff"/>
+
+  <!-- 창문 -->
+  <rect x="44" y="34" width="472" height="250" rx="22" fill="url(#sky)"/>
+  <rect x="44" y="34" width="472" height="250" rx="22" fill="none" stroke="#ffffff" stroke-width="10"/>
+  <line x1="280" y1="38" x2="280" y2="280" stroke="#ffffff" stroke-width="8"/>
+  <!-- 해 -->
+  <circle cx="420" cy="96" r="30" fill="#fde68a"/>
+  <circle cx="420" cy="96" r="44" fill="#fde68a" opacity=".25"/>
+  <!-- 구름 -->
+  <g fill="#ffffff">
+    <ellipse cx="128" cy="104" rx="42" ry="18"/>
+    <ellipse cx="158" cy="92" rx="30" ry="22"/>
+    <ellipse cx="102" cy="96" rx="22" ry="16"/>
+    <ellipse cx="356" cy="168" rx="34" ry="14" opacity=".9"/>
+    <ellipse cx="380" cy="158" rx="22" ry="16" opacity=".9"/>
+  </g>
+  <!-- 종이비행기 -->
+  <g transform="translate(196 150) rotate(-12)">
+    <path d="M0 18 L58 0 L30 34 Z" fill="#ffffff"/>
+    <path d="M30 34 L24 22 L58 0 Z" fill="#dbeefc"/>
+    <path d="M-70 40 q20 -18 40 -10 t40 -6" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="6 8" stroke-linecap="round"/>
+  </g>
+
+  <!-- 책상 -->
+  <rect x="0" y="300" width="560" height="140" fill="url(#desk)"/>
+  <rect x="0" y="296" width="560" height="10" fill="#e8f4fd"/>
+
+  <!-- 스탠드 -->
+  <g>
+    <ellipse cx="470" cy="300" rx="34" ry="8" fill="#0369a1"/>
+    <path d="M470 298 L470 236 L428 196" fill="none" stroke="#0369a1" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M404 176 q24 -14 46 6 l-14 22 q-20 -14 -42 -8 z" fill="#0284c7"/>
+    <path d="M396 200 l40 6 l-60 70 z" fill="#fde68a" opacity=".35"/>
+  </g>
+
+  <!-- 쌓인 책 -->
+  <g filter="url(#soft)">
+    <rect x="58" y="270" width="118" height="20" rx="5" fill="#7dd3fc"/>
+    <rect x="66" y="250" width="104" height="20" rx="5" fill="#fda4af"/>
+    <rect x="52" y="230" width="112" height="20" rx="5" fill="#0284c7"/>
+    <rect x="64" y="290" width="130" height="14" rx="5" fill="#fbbf24"/>
+    <rect x="58" y="236" width="98" height="3" rx="1.5" fill="#ffffff" opacity=".6"/>
+    <rect x="74" y="256" width="88" height="3" rx="1.5" fill="#ffffff" opacity=".6"/>
+  </g>
+
+  <!-- 펼친 책 -->
+  <g filter="url(#soft)">
+    <path d="M178 336 q100 -22 102 -6 q2 -16 102 6 l-6 40 q-96 -18 -96 -4 q0 -14 -96 4 z" fill="url(#cover)"/>
+    <path d="M186 330 q92 -24 94 -8 l0 44 q-2 -14 -94 6 z" fill="#ffffff"/>
+    <path d="M374 330 q-92 -24 -94 -8 l0 44 q2 -14 94 6 z" fill="#ffffff"/>
+    <g stroke="#bae6fd" stroke-width="3" stroke-linecap="round">
+      <line x1="204" y1="334" x2="262" y2="324"/>
+      <line x1="204" y1="346" x2="262" y2="336"/>
+      <line x1="204" y1="358" x2="246" y2="350"/>
+      <line x1="298" y1="324" x2="356" y2="334"/>
+      <line x1="298" y1="336" x2="356" y2="346"/>
+    </g>
+    <path d="M300 352 l8 8 l16 -16" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 연필 -->
+  <g transform="translate(330 398) rotate(-14)">
+    <rect x="0" y="0" width="96" height="12" rx="3" fill="#fbbf24"/>
+    <rect x="0" y="0" width="14" height="12" rx="3" fill="#fda4af"/>
+    <path d="M96 0 L116 6 L96 12 Z" fill="#fde7c4"/>
+    <path d="M110 4.3 L116 6 L110 7.7 Z" fill="#1b2a38"/>
+  </g>
+
+  <!-- 화분 -->
+  <g>
+    <path d="M500 250 q-22 -40 4 -66 q14 26 -4 66" fill="#34d399"/>
+    <path d="M504 252 q20 -34 46 -38 q-6 30 -46 38" fill="#10b981"/>
+    <path d="M498 254 q-30 -20 -46 -14 q14 24 46 14" fill="#6ee7b7"/>
+    <path d="M478 254 h50 l-6 46 h-38 z" fill="#ffffff"/>
+    <rect x="474" y="250" width="58" height="10" rx="4" fill="#e0f2fe"/>
+  </g>
+
+  <!-- 머그컵 -->
+  <g>
+    <path d="M110 340 q-8 -12 0 -22 M126 338 q-8 -12 0 -22" fill="none" stroke="#bae6fd" stroke-width="3" stroke-linecap="round"/>
+    <rect x="94" y="346" width="48" height="50" rx="10" fill="#ffffff" filter="url(#soft)"/>
+    <path d="M142 358 q16 0 16 14 q0 14 -16 14" fill="none" stroke="#ffffff" stroke-width="7"/>
+    <path d="M110 368 q8 -8 16 0 q-8 10 -16 0" fill="#fda4af"/>
+  </g>
+
+  <!-- A+ 배지 -->
+  <g transform="translate(470 360)" filter="url(#soft)">
+    <circle r="34" fill="#ffffff"/>
+    <circle r="27" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 5"/>
+    <text x="0" y="10" text-anchor="middle" font-family="Pretendard, -apple-system, 'Malgun Gothic', sans-serif" font-size="28" font-weight="800" fill="#0284c7">A+</text>
+  </g>
+
+  <!-- 반짝임 -->
+  <g fill="#fbbf24">
+    <path d="M232 214 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z"/>
+    <path d="M410 250 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 z" opacity=".8"/>
+  </g>
+</svg>
