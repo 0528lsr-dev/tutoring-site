@@ -5,8 +5,16 @@ var SHEET_TAB = "티쳐포유";
 var SITE_NAME = "티쳐포유";
 (function(){
   function val(id){ var el = document.getElementById(id); return el ? String(el.value).trim() : ""; }
+  /* 2026-11-05: 시트가 "ok" 로 답할 때만 접수 완료. Apps Script 응답은 CORS 허용이라 내용을 읽을 수 있다 */
   function send(payload){
-    return fetch(SHEET_ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: new URLSearchParams(payload).toString() });
+    return fetch(SHEET_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: new URLSearchParams(payload).toString() })
+      .then(function(r){ return r.text(); })
+      .then(function(t){ if (String(t).trim() !== "ok") throw new Error("sheet: " + t); });
+  }
+  function fail(form, id){
+    var bad = document.getElementById(id + "_err");
+    if (!bad) { bad = document.createElement("p"); bad.id = id + "_err"; bad.style.cssText = "color:#c62828;font-size:.92rem;margin:10px 0 0"; form.appendChild(bad); }
+    bad.innerHTML = '접수가 되지 않았습니다. 잠시 후 다시 눌러 주시거나 <a href="tel:01055773067" style="color:inherit"><b>010-5577-3067</b></a>로 전화 주세요.';
   }
   var tParam = new URLSearchParams(location.search).get("t") || "";
   [].slice.call(document.querySelectorAll("form[id]")).forEach(function(form){
@@ -32,7 +40,12 @@ var SITE_NAME = "티쳐포유";
       };
       var btn = form.querySelector('button[type="submit"]'); var orig = btn ? btn.textContent : "";
       if (btn) { btn.disabled = true; btn.textContent = "접수 중…"; }
-      try { await send(payload); } catch (_) {}
+      try { await send(payload); } catch (_) {
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+        fail(form, id);
+        return;
+      }
+      var err = document.getElementById(id + "_err"); if (err) err.remove();
       var ok = document.getElementById(id + "_ok"); if (ok) ok.style.display = "block";
       if (btn) btn.textContent = "신청 완료 ✓";
       if (typeof gtag === "function") gtag("event", "form_submit", { form: id });
