@@ -74,11 +74,16 @@
     set('ref', info.ref);
     var done = false;
     var go = function (geo) { if (done) return; done = true; info.geo = geo || ''; set('geo', info.geo); post(info); };
-    setTimeout(function () { go(''); }, 2500);
-    try { fetch('https://ipapi.co/json/').then(function (r) { return r.json(); }).then(function (d) { if (d && SKIP.indexOf(d.ip) >= 0) { done = true; try { ls.setItem('novisit', '1'); } catch (e) {} return; } go(region(d)); }, function () { go(''); }); } catch (e) { go(''); }
+    /* 2026-11-05: 구글·아마존 같은 서버 회사(검색 로봇이 브라우저처럼 들어옴, 예: 미국 Mountain View) 는 알림 안 보냄 */
+    var DC = /google|amazon|aws|microsoft|azure|digitalocean|linode|akamai|ovh|hetzner|cloudflare|oracle|alibaba|tencent|facebook|meta platforms|apple|yandex|baidu|naver cloud|kakao enterprise/i;
+    setTimeout(function () { go(''); }, 6000);
+    try { fetch('https://ipapi.co/json/').then(function (r) { return r.json(); }).then(function (d) {
+      if (d && SKIP.indexOf(d.ip) >= 0) { done = true; try { ls.setItem('novisit', '1'); } catch (e) {} return; }
+      if (d && DC.test((d.org || '') + ' ' + (d.asn_org || ''))) { done = true; set('bot', '1'); return; }
+      go(region(d)); }, function () { go(''); }); } catch (e) { go(''); }
   }
   function hot() {
-    if (get('hot')) return;
+    if (get('hot') || get('bot')) return;
     try { if (ls.getItem && ls.getItem('novisit')) return; } catch (e) {}
     var sec = Math.round((Date.now() - +(get('start') || Date.now())) / 1000), pages = +(get('pages') || 1);
     if (sec < 60 && pages < 3) return;
