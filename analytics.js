@@ -73,7 +73,12 @@
     var info = { site: SITE, kind: 'visit', title: title, path: path, ref: source(), dev: device(), geo: '' };
     set('ref', info.ref);
     var done = false;
-    var go = function (geo) { if (done) return; done = true; info.geo = geo || ''; set('geo', info.geo); post(info); };
+    var go = function (geo) {
+      if (done) return; done = true;
+      /* 위치를 못 얻었는데 브라우저 언어가 한국어가 아니면(검색 로봇은 보통 en-US) 보내지 않는다 — 2026-11-05 */
+      if (!geo && !/^ko/i.test(navigator.language || '')) { set('bot', '1'); return; }
+      info.geo = geo || ''; set('geo', info.geo); post(info);
+    };
     /* 2026-11-05: 구글·아마존 같은 서버 회사(검색 로봇이 브라우저처럼 들어옴, 예: 미국 Mountain View) 는 알림 안 보냄 */
     var DC = /google|amazon|aws|microsoft|azure|digitalocean|linode|akamai|ovh|hetzner|cloudflare|oracle|alibaba|tencent|facebook|meta platforms|apple|yandex|baidu|naver cloud|kakao enterprise/i;
     setTimeout(function () { go(''); }, 6000);
