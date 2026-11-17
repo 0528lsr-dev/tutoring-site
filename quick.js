@@ -1,5 +1,5 @@
 /* 티쳐포유 — 간편선택 팝업 (생성기 출력물: 생성기 폴더, 본문은 지역과외/quickpick.js 공용). 손으로 고치지 말 것. */
-window.QCFG={"ep":"https://script.google.com/macros/s/AKfycbx7cFmG03i-dpfj7IWynETu5Z2af_dla1qaA-Kt8KbFF28H-4Re684VpmO7vBSeaILU/exec","tab":"티쳐포유","site":"티쳐포유","area":"","tel":"010-5577-3067","telRaw":"01055773067","hasVisit":true,"dongs":[],"tiles":[["국어과외","📖","국어 내신·시험 대비를 학교 기준으로 준비합니다"],["영어과외","🔤","영어 내신·시험 대비를 학교 기준으로 준비합니다"],["수학과외","📐","수학 내신·시험 대비를 학교 기준으로 준비합니다"],["사회과외","🗺️","사회 내신·시험 대비를 학교 기준으로 준비합니다"],["과학과외","🔬","과학 내신·시험 대비를 학교 기준으로 준비합니다"],["한국사과외","🏯","한국사 내신·시험 대비를 학교 기준으로 준비합니다"],["물리과외","⚛️","물리 내신·시험 대비를 학교 기준으로 준비합니다"],["화학과외","🧪","화학 내신·시험 대비를 학교 기준으로 준비합니다"],["생물과외","🧬","생물 내신·시험 대비를 학교 기준으로 준비합니다"],["코딩과외","💻","코딩 내신·시험 대비를 학교 기준으로 준비합니다"],["영어회화과외","💬","원어민·교포 선생님과 전화·화상으로"]],"grades":["초1","초2","초3","초4","초5","초6","중1","중2","중3","고1","고2","고3·재수생","성인"],"links":[["학교찾기","https://teacher4u.co.kr/pages/학교찾기.html"],["선생님 보기","https://teacher4u.co.kr/teachers.html"],["회화 과외","https://teacher4u.co.kr/conversation/index.html"]]};
+window.QCFG={"ep":"https://script.google.com/macros/s/AKfycbx7cFmG03i-dpfj7IWynETu5Z2af_dla1qaA-Kt8KbFF28H-4Re684VpmO7vBSeaILU/exec","tab":"티쳐포유","site":"티쳐포유","area":"","tel":"010-5577-3067","telRaw":"01055773067","hasVisit":true,"dongs":[],"tiles":[["국어과외","📖","국어 내신·시험 대비를 학교 기준으로 준비합니다"],["영어과외","🔤","영어 내신·시험 대비를 학교 기준으로 준비합니다"],["수학과외","📐","수학 내신·시험 대비를 학교 기준으로 준비합니다"],["사회과외","🗺️","사회 내신·시험 대비를 학교 기준으로 준비합니다"],["과학과외","🔬","과학 내신·시험 대비를 학교 기준으로 준비합니다"],["한국사과외","🏯","한국사 내신·시험 대비를 학교 기준으로 준비합니다"],["물리과외","⚛️","물리 내신·시험 대비를 학교 기준으로 준비합니다"],["화학과외","🧪","화학 내신·시험 대비를 학교 기준으로 준비합니다"],["생물과외","🧬","생물 내신·시험 대비를 학교 기준으로 준비합니다"],["코딩과외","💻","코딩 내신·시험 대비를 학교 기준으로 준비합니다"],["영어회화과외","💬","원어민·교포 선생님과 전화·화상으로"]],"channelKey":"acff0202-fe5c-49cb-97da-ad6d7fdfd44c","grades":["초1","초2","초3","초4","초5","초6","중1","중2","중3","고1","고2","고3·재수생","성인"],"links":[["학교찾기","https://teacher4u.co.kr/pages/학교찾기.html"],["선생님 보기","https://teacher4u.co.kr/teachers.html"],["회화 과외","https://teacher4u.co.kr/conversation/index.html"]]};
 try { if (/[?&]nopop/.test(location.search)) sessionStorage.setItem('qpick', '1'); } catch (_) {}
 
 (function(){
@@ -64,12 +64,8 @@ try { if (/[?&]nopop/.test(location.search)) sessionStorage.setItem('qpick', '1'
     /* 여는 버튼: 페이지에 #quickOpen 이 있으면 그것, 없으면 왼쪽 아래 작은 버튼 */
     var opener = document.getElementById('quickOpen');
     if (opener) opener.addEventListener('click', open);
-    else {
-      var fab = el('button', 'q-fab', '⚡ 어떤 도움이 필요하세요?');
-      fab.type = 'button';
-      fab.addEventListener('click', open);
-      document.body.appendChild(fab);
-    }
+    /* 2026-11-17: 국제학교튜터와 같게 — 왼쪽 아래 작은 버튼 대신 오른쪽 플로팅 "무료 테스트 신청"([data-quick])이 이 창을 연다 */
+    [].forEach.call(document.querySelectorAll('[data-quick]'), function(a){ a.addEventListener('click', function(e){ e.preventDefault(); open(); }); });
     box.querySelector('.q-close').addEventListener('click', close);
     modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
@@ -138,5 +134,72 @@ try { if (/[?&]nopop/.test(location.search)) sessionStorage.setItem('qpick', '1'
     });
   }
 
+  /* 2026-11-17: 국제학교튜터(공용/quick-intl.js)와 같은 실시간 상담·카톡 상담 — 먼저 이름·연락처를 받아 상담 시트로 보낸 뒤 연다 */
+  function gate(id, title, sub, btn, tag){
+    var m = document.createElement('div'); m.className = 'q-modal'; m.id = id;
+    m.innerHTML = '<div class="quick" role="dialog" aria-label="' + tag + '"><button class="q-close" type="button" aria-label="닫기">×</button>' +
+      '<div class="q-title">' + title + '<small>' + sub + '</small></div>' +
+      '<div class="q-row2"><input type="text" class="g_name" placeholder="학생 이름 * (예: 김민준)" autocomplete="off"><input type="tel" class="g_phone" placeholder="연락처 *" autocomplete="tel"></div>' +
+      '<input type="text" class="g_grade" placeholder="학교·학년 (예: ○○중 2학년)">' +
+      '<button class="q-submit" type="button">' + btn + '</button>' +
+      '<p class="q-hint" style="margin:10px 0 0">입력하신 정보는 상담 연락에만 사용합니다.</p></div>';
+    document.body.appendChild(m);
+    var cb = null;
+    function close(){ m.classList.remove('open'); }
+    m.querySelector('.q-close').addEventListener('click', close);
+    m.addEventListener('click', function(e){ if (e.target === m) close(); });
+    m.querySelector('.q-submit').addEventListener('click', function(){
+      var u = { name: m.querySelector('.g_name').value.trim(), phone: m.querySelector('.g_phone').value.trim(), grade: m.querySelector('.g_grade').value.trim() };
+      if (!u.name || !u.phone) { alert('학생 이름과 연락처를 입력해 주세요.'); return; }
+      var d = new URLSearchParams({
+        sheet: C.tab, _form: C.site, _time: new Date().toLocaleString('ko-KR'),
+        사이트: C.site, 이름: u.name, 연락처: u.phone, 학년: u.grade, 과목: tag, 남길말: '[' + tag + ' 시작]', 신청페이지: location.origin + location.pathname,
+        name: u.name, phone: u.phone, grade: u.grade, subject: tag,
+        memo: '[' + tag + ' 시작] ' + location.pathname
+      });
+      if (C.ep) fetch(C.ep, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }, body: d.toString() }).catch(function(){});
+      close(); if (cb) cb(u);
+    });
+    return { open: function(f){ cb = f; m.classList.add('open'); setTimeout(function(){ m.querySelector('.g_name').focus(); }, 50); } };
+  }
+  function kakaoGate(){
+    var links = document.querySelectorAll('a[href*="open.kakao.com"]');
+    if (!links.length) return;
+    var g = gate('kgate', '💛 카카오톡 상담 시작', '상담이 중간에 끊겨도 다시 연락드릴 수 있게 먼저 남겨 주세요', '카카오톡 상담 열기 →', '카톡상담');
+    links.forEach(function(a){
+      a.addEventListener('click', function(e){
+        try { if (localStorage.getItem('kgate')) return; } catch (x) {}
+        e.preventDefault(); var href = a.href;
+        g.open(function(){ try { localStorage.setItem('kgate', '1'); } catch (x) {} window.open(href, '_blank', 'noopener'); if (typeof gtag === 'function') gtag('event', 'kakao_gate_submit'); });
+      });
+    });
+  }
+  function liveChat(){
+    var btns = document.querySelectorAll('[data-live]');
+    if (!btns.length || !C.channelKey) return;
+    var w = window; if (w.ChannelIO) return;
+    var ch = function(){ ch.c(arguments); }; ch.q = []; ch.c = function(a){ ch.q.push(a); }; w.ChannelIO = ch;
+    function load(){ if (w.ChannelIOInitialized) return; w.ChannelIOInitialized = true;
+      var s = document.createElement('script'); s.async = true; s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js'; document.head.appendChild(s); }
+    if (document.readyState === 'complete') load(); else w.addEventListener('load', load);
+    function e164(p){ var d = (p || '').replace(/[^\d+]/g, ''); if (/^\+\d{8,}$/.test(d)) return d; if (/^0\d{8,10}$/.test(d)) return '+82' + d.slice(1); return ''; }
+    function profileOf(u){ var pr = { name: u.name, '연락처': u.phone, '학교학년': u.grade || '', '사이트': C.site }; var m = e164(u.phone); if (m) pr.mobileNumber = m; return pr; }
+    var saved = null; try { saved = JSON.parse(localStorage.getItem('lgate') || 'null'); } catch (x) {}
+    var opt = { pluginKey: C.channelKey, hideChannelButtonOnBoot: true, language: 'ko' };
+    if (saved) opt.profile = profileOf(saved);
+    ChannelIO('boot', opt);
+    var g = gate('lgate', '💬 실시간 상담 시작', '답변이 늦어지거나 창을 닫아도 다시 연락드릴 수 있게 먼저 남겨 주세요', '실시간 상담 시작 →', '실시간상담');
+    function openChat(){ ChannelIO('showMessenger'); if (typeof gtag === 'function') gtag('event', 'live_chat_open'); }
+    [].forEach.call(btns, function(b){
+      b.addEventListener('click', function(e){
+        e.preventDefault();
+        if (saved) { openChat(); return; }
+        g.open(function(u){ saved = u; try { localStorage.setItem('lgate', JSON.stringify(u)); } catch (x) {} ChannelIO('updateUser', { profile: profileOf(u) }); openChat(); });
+      });
+    });
+  }
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', liveChat); else liveChat();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', kakaoGate); else kakaoGate();
 })();

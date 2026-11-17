@@ -58,13 +58,13 @@
     </g>
   </g>
 
-  <!-- 떠 있는 카드: 외국어 -->
+  <!-- 떠 있는 카드: 국·영·수 (2026-11-17 외국어 카드 대신 — 사이트 중심은 국영수 과외) -->
   <g filter="url(#sh)">
-    <rect x="398" y="236" width="168" height="66" rx="33" fill="#ffffff"/>
-    <g font-family="Pretendard, 'Malgun Gothic', 'Microsoft YaHei', 'Yu Gothic', sans-serif" font-size="21" font-weight="800" text-anchor="middle">
-      <circle cx="434" cy="269" r="21" fill="#e0f2fe"/><text x="434" y="276" fill="#0369a1">A</text>
-      <circle cx="482" cy="269" r="21" fill="#fde8e8"/><text x="482" y="276" fill="#b91c1c">中</text>
-      <circle cx="530" cy="269" r="21" fill="#fff3d6"/><text x="530" y="276" fill="#b45309">あ</text>
+    <rect x="392" y="232" width="186" height="72" rx="36" fill="#ffffff"/>
+    <g font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="20" font-weight="800" text-anchor="middle">
+      <circle cx="432" cy="268" r="24" fill="#e0f2fe"/><text x="432" y="275" fill="#0369a1">국</text>
+      <circle cx="485" cy="268" r="24" fill="#dcfce7"/><text x="485" y="275" fill="#15803d">영</text>
+      <circle cx="538" cy="268" r="24" fill="#fff3d6"/><text x="538" y="275" fill="#b45309">수</text>
     </g>
   </g>
 
