@@ -6,8 +6,8 @@
       <stop offset="1" stop-color="#e2f0fb"/>
     </linearGradient>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#9fd6f7"/>
-      <stop offset="1" stop-color="#dff2fd"/>
+      <stop offset="0" stop-color="#b6dcf3"/>
+      <stop offset="1" stop-color="#eef7fd"/>
     </linearGradient>
     <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#f4f8fb"/>
@@ -29,7 +29,7 @@
   <!-- 벽 -->
   <rect width="900" height="700" fill="url(#wall)"/>
 
-  <!-- 창 (맑은 낮) -->
+  <!-- 창 (2026-11-26 겨울: 눈 오는 하늘, 지붕 위 눈) -->
   <g>
     <rect x="540" y="56" width="340" height="250" rx="14" fill="url(#sky)"/>
     <g fill="#ffffff" opacity=".95">
@@ -39,6 +39,20 @@
     <g fill="#b9dcf2">
       <rect x="548" y="250" width="40" height="56"/><rect x="586" y="232" width="30" height="74"/><rect x="614" y="258" width="46" height="48"/>
       <rect x="760" y="240" width="34" height="66"/><rect x="792" y="226" width="44" height="80"/><rect x="834" y="256" width="40" height="50"/>
+    </g>
+    <g fill="#ffffff">
+      <rect x="548" y="246" width="40" height="7" rx="3"/><rect x="586" y="228" width="30" height="7" rx="3"/><rect x="614" y="254" width="46" height="7" rx="3"/>
+      <rect x="760" y="236" width="34" height="7" rx="3"/><rect x="792" y="222" width="44" height="7" rx="3"/><rect x="834" y="252" width="40" height="7" rx="3"/>
+      <rect x="546" y="290" width="328" height="14" rx="7"/>
+    </g>
+    <g fill="#ffffff" opacity=".9">
+      <circle cx="566" cy="82" r="3"/><circle cx="602" cy="150" r="2.5"/><circle cx="650" cy="92" r="3.5"/><circle cx="676" cy="176" r="2.5"/><circle cx="584" cy="208" r="3"/>
+      <circle cx="642" cy="224" r="2"/><circle cx="690" cy="128" r="2.5"/><circle cx="742" cy="86" r="3"/><circle cx="770" cy="132" r="2.5"/><circle cx="856" cy="96" r="3.5"/>
+      <circle cx="736" cy="196" r="3"/><circle cx="862" cy="206" r="2.5"/><circle cx="818" cy="122" r="2"/><circle cx="752" cy="160" r="2"/><circle cx="626" cy="186" r="2.5"/>
+    </g>
+    <g fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" opacity=".95">
+      <path d="M612 60 v18 M603 69 h18 M606 63 l12 12 M618 63 l-12 12" transform="translate(0 40)"/>
+      <path d="M836 150 v16 M828 158 h16 M830 152 l12 12 M842 152 l-12 12"/>
     </g>
     <rect x="540" y="56" width="340" height="250" rx="14" fill="none" stroke="#ffffff" stroke-width="12"/>
     <line x1="710" y1="62" x2="710" y2="300" stroke="#ffffff" stroke-width="9"/>
@@ -115,16 +129,19 @@
     <circle cx="830" cy="345" r="6" fill="#ef4444"/>
   </g>
 
-  <!-- 학생 (뒷모습) -->
+  <!-- 학생 (뒷모습 — 2026-11-26 여학생: 긴 머리·머리띠, 겨울 목도리) -->
   <g>
-    <!-- 몸통(교복 재킷) -->
     <path d="M440 640 L452 432 q4 -30 34 -36 l40 -6 q30 0 62 6 q30 6 34 36 L676 640 Z" fill="url(#blazer)"/>
-    <!-- 목·머리 -->
-    <rect x="522" y="360" width="28" height="36" rx="10" fill="#e8b994"/>
-    <circle cx="536" cy="336" r="46" fill="#1f2937"/>
-    <ellipse cx="489" cy="342" rx="7" ry="11" fill="#e8b994"/>
-    <ellipse cx="583" cy="342" rx="7" ry="11" fill="#e8b994"/>
-    <path d="M492 320 q44 -40 88 0" fill="none" stroke="#374151" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+    <!-- 목도리 -->
+    <path d="M474 394 q62 26 124 0 l8 24 q-70 30 -140 0 z" fill="#e11d48"/>
+    <g stroke="#fecdd3" stroke-width="3" opacity=".8"><line x1="498" y1="398" x2="494" y2="414"/><line x1="574" y1="398" x2="578" y2="414"/></g>
+    <!-- 긴 머리 -->
+    <path d="M490 330 q0 -44 46 -44 q46 0 46 44 q2 40 -2 92 q-4 44 -16 62 q-28 10 -56 0 q-12 -18 -16 -62 q-4 -52 -2 -92 z" fill="#2b1d16"/>
+    <path d="M500 350 q-2 60 8 118" fill="none" stroke="#3d2a20" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <path d="M536 340 q0 70 2 140" fill="none" stroke="#3d2a20" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+    <path d="M572 350 q2 60 -8 118" fill="none" stroke="#3d2a20" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <!-- 머리띠 -->
+    <path d="M492 322 q44 -42 88 0" fill="none" stroke="#f9a8d4" stroke-width="7" stroke-linecap="round"/>
     <!-- 오른팔(책상 위로) -->
     <path d="M640 452 q34 4 46 26 l-14 10 q-16 -14 -40 -14 z" fill="#25466b"/>
     <ellipse cx="682" cy="482" rx="13" ry="8" fill="#e8b994"/>

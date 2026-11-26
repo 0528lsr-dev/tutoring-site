@@ -253,6 +253,31 @@ header{position:sticky;top:0;z-index:50;background:rgba(245,250,255,.88);backdro
 .post-item h3 a{color:var(--ink)}
 .post-item time,.post-item .cat{font-size:.8rem;color:var(--ink-soft)}
 .post-item .cat{color:var(--hl);font-weight:700;margin-right:8px}
+/* 겨울방학 특강 페이지 머리 (2026-11-26) */
+.page-hero.winter-hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#0b3a63 0%,#0369a1 55%,#38bdf8 100%);color:#fff;border:0}
+.page-hero.winter-hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff 1.6px,transparent 1.8px),radial-gradient(rgba(255,255,255,.7) 1.2px,transparent 1.4px);background-size:46px 46px,29px 29px;background-position:0 0,14px 20px;opacity:.35;pointer-events:none}
+.page-hero.winter-hero:after{content:"⛄";position:absolute;right:6%;bottom:-10px;font-size:170px;line-height:1;opacity:.9;pointer-events:none}
+.page-hero.winter-hero .wrap{position:relative}
+.page-hero.winter-hero h1,.page-hero.winter-hero h1 em,.page-hero.winter-hero .crumb,.page-hero.winter-hero .crumb a{color:#fff}
+.page-hero.winter-hero h1 em{color:#bae6fd}
+.page-hero.winter-hero .lead{color:rgba(255,255,255,.88)}
+@media (max-width:640px){.page-hero.winter-hero:after{font-size:90px;right:2%;bottom:-6px;opacity:.5}}
+/* 홈 겨울방학 띠 (2026-11-26) */
+.winter-band{position:relative;overflow:hidden;background:linear-gradient(120deg,#0b3a63 0%,#0369a1 55%,#38bdf8 100%);color:#fff;padding:44px 0}
+.winter-band:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff 1.6px,transparent 1.8px),radial-gradient(rgba(255,255,255,.7) 1.2px,transparent 1.4px);background-size:46px 46px,29px 29px;background-position:0 0,14px 20px;opacity:.35;pointer-events:none}
+.winter-band:after{content:"❄";position:absolute;right:4%;top:-30px;font-size:210px;line-height:1;color:rgba(255,255,255,.12);pointer-events:none}
+.wb-in{position:relative;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.wb-tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 14px;font-weight:800;font-size:.85rem}
+.winter-band h2{color:#fff;margin:12px 0 8px;font-size:clamp(1.5rem,3vw,2.1rem)}
+.winter-band p{color:rgba(255,255,255,.88);margin:0;max-width:620px}
+.wb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.wb-chips a{color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:7px 14px;border-radius:999px;font-weight:700;font-size:.88rem;text-decoration:none}
+.wb-chips a:hover{background:#fff;color:#0369a1}
+.wb-cta{display:flex;flex-direction:column;gap:10px;min-width:220px}
+@media (min-width:1100px){.wb-in{padding-right:200px}}   /* 오른쪽 상담 버튼에 가리지 않게 */
+.wb-btn{background:#fff;color:#0369a1;font-weight:800;justify-content:center}
+.wb-btn2{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6);font-weight:700;justify-content:center}
+.views{font-size:.8rem;color:var(--ink-soft);margin-left:8px;white-space:nowrap}.views b{font-weight:600}
 
 /* 회화 */
 .lang-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 22px}
